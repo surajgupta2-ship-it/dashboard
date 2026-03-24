@@ -27,7 +27,8 @@ if bucket:
 # KPIs
 c1, c2, c3 = st.columns(3)
 c1.metric("Total", int(df['Total'].sum()))
-c2.metric("LH Lane", int(df['LH lane new'].sum()))
+df['LH lane new'] = pd.to_numeric(df['LH lane new'], errors='coerce')
+c2.metric("LH Lane", int(df['LH lane new'].fillna(0).sum()))
 c3.metric("RCAs", df['RCAs'].count())
 
 # Charts
